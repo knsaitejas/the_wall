@@ -1,0 +1,13 @@
+input {
+	display: block
+}
+
+.register {
+	margin-left: 20px;
+	margin-top: 50px;
+}
+
+.login {
+	margin-left: 20px;
+	margin-top: 20px;
+}

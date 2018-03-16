@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CodingDojo Wall</title>
+	<link rel="stylesheet" type="text/css" href="../static/cs2.css">
+</head>
+<body>
+	<div class="background">
+		<h2>CodingDojo Wall</h2>
+		<p class="welcome">Welcome {{name}}</p>
+		<a href="/logout">Log Off</a>
+		<div class="post_message">
+			<p>Post a message</p>
+			<form action="/posted" method="POST">
+				<textarea name="message">Type here</textarea>
+				<input type="submit" name="submit">
+			</form>
+		</div>
+		<div class="post">
+			{% for m in user_messages %}
+			<div class="message">
+				<p class="name">{{m['first_name']}} - {{m['created_at']}}</p>
+				<p>{{m['message']}}</p>
+				{% for c in user_comments %}
+					{% if c['m_id'] == m['m_id'] %}
+					<div class="comments">
+					<p class="name">{{c['first_name']}} - {{c['created_at']}}</p>
+					<p>{{c['comment']}}</p>
+					{% endif %}
+				{% endfor %}
+				</div>
+				<form action='/commented' method="POST">
+					<textarea name="comment">Type here</textarea>
+					<input type="hidden" name="message_id" value={{m['m_id']}}>
+					<input type="submit" name="submit">
+			</form>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+</body>
+</html>
